@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,6 +29,8 @@ import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplica
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.repository.UserRepository;
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.security.jwt.JwtUtils;
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.security.services.UserDetailsImpl;
+
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
