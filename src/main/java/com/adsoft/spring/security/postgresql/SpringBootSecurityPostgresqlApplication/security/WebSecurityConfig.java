@@ -68,7 +68,7 @@ public class WebSecurityConfig   {
               .requestMatchers("/api/auth/**").permitAll()
               .requestMatchers("/api/test/**").permitAll()
               .requestMatchers("/api/songs/**").authenticated()
-              .requestMatchers("/api/reactions/**").permitAll()
+            .requestMatchers("/api/reactions/**").authenticated()
               .anyRequest().authenticated()
         );
     

@@ -48,7 +48,7 @@ public class SongReactionController {
     }
   
   @PostMapping("/create")
-  @PreAuthorize("IsAuthenticated()")
+    @PreAuthorize("isAuthenticated()")
   public SongReaction createReaction(@Valid @RequestBody SongReactionRequest SongReaction) {
         System.out.println("Songid : " + SongReaction.getSongId()  );
         System.out.println("reactiontid : " + SongReaction.getReactionId()  );
