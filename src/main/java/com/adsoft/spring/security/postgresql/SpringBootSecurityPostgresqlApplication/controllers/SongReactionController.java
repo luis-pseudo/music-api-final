@@ -1,32 +1,30 @@
 package com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.controllers;
 import java.util.Optional;
 
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.Reaction;
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.Song;
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.SongReaction;
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.User;
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.payload.request.SongReactionRequest;
-import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.Reaction;
-
-import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.repository.UserRepository;
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.repository.ReactionRepository;
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.repository.SongReactionRepository;
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.repository.SongRepository;
+import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.repository.UserRepository;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -50,6 +48,7 @@ public class SongReactionController {
     }
   
   @PostMapping("/create")
+  @PreAuthorize("IsAuthenticated()")
   public SongReaction createReaction(@Valid @RequestBody SongReactionRequest SongReaction) {
         System.out.println("Songid : " + SongReaction.getSongId()  );
         System.out.println("reactiontid : " + SongReaction.getReactionId()  );
