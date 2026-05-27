@@ -38,6 +38,3 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USER }}/mi-app:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USER }}/mi-app:latest
-
-      - name: Trigger Render Deploy
-        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
