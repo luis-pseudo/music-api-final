@@ -30,11 +30,11 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t ${{ secrets.DOCKER_USER }}/mi-app:${{ github.sha }} \
-            -t ${{ secrets.DOCKER_USER }}/mi-app:latest \
+            -t ${{ secrets.DOCKER_USER }}/music-api-final:${{ github.sha }} \
+            -t ${{ secrets.DOCKER_USER }}/music-api-final:latest \
             .
 
       - name: Push Docker images
         run: |
-          docker push ${{ secrets.DOCKER_USER }}/mi-app:${{ github.sha }}
-          docker push ${{ secrets.DOCKER_USER }}/mi-app:latest
+          docker push ${{ secrets.DOCKER_USER }}/music-api-final:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USER }}/music-api-final:latest
