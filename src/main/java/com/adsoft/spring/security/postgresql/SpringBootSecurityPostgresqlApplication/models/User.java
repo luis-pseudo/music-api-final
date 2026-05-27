@@ -3,7 +3,17 @@ package com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplic
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -18,7 +28,6 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
 
   @NotBlank
   @Size(max = 20)
@@ -94,13 +103,13 @@ public class User {
 
 
   @OneToMany(mappedBy = "user")
-  Set<TweetReaction> likes;
+  Set<SongReaction> likes;
 
-  public Set<TweetReaction> getLikes() {
+  public Set<SongReaction> getLikes() {
     return likes;
   }
 
-  public void setLikes(Set<TweetReaction> likes) {
+  public void setLikes(Set<SongReaction> likes) {
     this.likes = likes;
   }
 

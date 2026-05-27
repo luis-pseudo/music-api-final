@@ -1,15 +1,13 @@
 package com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.payload.request;
 
-import jakarta.validation.constraints.NotBlank;
-
-public class TweetReactionRequest {
-  private Long tweetId;
-  public Long getTweetId() {
-    return tweetId;
+public class SongReactionRequest {
+  private Long songId;
+  public Long getSongId() {
+    return songId;
 }
 
-  public void setTweetId(Long tweetId) {
-    this.tweetId = tweetId;
+  public void setSongId(Long songId) {
+    this.songId = songId;
   }
 
   private Long reactionId;

@@ -14,16 +14,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.Tweet;
-import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.TweetReaction;
+import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.Song;
+import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.SongReaction;
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.User;
-import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.payload.request.TweetReactionRequest;
+import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.payload.request.SongReactionRequest;
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.Reaction;
 
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.repository.UserRepository;
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.repository.ReactionRepository;
-import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.repository.TweetReactionRepository;
-import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.repository.TweetRepository;
+import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.repository.SongReactionRepository;
+import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.repository.SongRepository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,27 +32,27 @@ import org.springframework.data.domain.Pageable;
 @RestController
 @RequestMapping("/api/reactions")
 
-public class TweetReactionController {
+public class SongReactionController {
 
     @Autowired
-    private TweetReactionRepository tweetReactionRepository;
+    private SongReactionRepository SongReactionRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private TweetRepository tweetRepository;
+    private SongRepository SongRepository;
     @Autowired
     private ReactionRepository reactionRepository;
 
 
   @GetMapping("/all")
-    public Page<TweetReaction> getTweet(Pageable pageable) {
-        return tweetReactionRepository.findAll(pageable);
+    public Page<SongReaction> getSong(Pageable pageable) {
+        return SongReactionRepository.findAll(pageable);
     }
   
   @PostMapping("/create")
-  public TweetReaction createReaction(@Valid @RequestBody TweetReactionRequest tweetReaction) {
-        System.out.println("tweetid : " + tweetReaction.getTweetId()  );
-        System.out.println("reactiontid : " + tweetReaction.getReactionId()  );
+  public SongReaction createReaction(@Valid @RequestBody SongReactionRequest SongReaction) {
+        System.out.println("Songid : " + SongReaction.getSongId()  );
+        System.out.println("reactiontid : " + SongReaction.getReactionId()  );
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
@@ -64,34 +64,34 @@ public class TweetReactionController {
 
         System.out.println(user);
 
-        TweetReaction myTweetReaction = new TweetReaction();
-        Tweet myTweet = getValidTweet(tweetReaction.getTweetId());
-        System.out.println("object tweet : " );
-        System.out.println(myTweet );
+        SongReaction mySongReaction = new SongReaction();
+        Song mySong = getValidSong(SongReaction.getSongId());
+        System.out.println("object Song : " );
+        System.out.println(mySong );
 
 
-        Reaction myReaction = getValidReaction(tweetReaction.getReactionId());
+        Reaction myReaction = getValidReaction(SongReaction.getReactionId());
         System.out.println("object reaction : "   );
         System.out.println( myReaction );
 
-        //myTweetReaction.setUserId(user.getId());
-        //myTweetReaction.setTweetId(myTweet.getId());
-        //myTweetReaction.setReactionId(myReaction.getId());
+        //mySongReaction.setUserId(user.getId());
+        //mySongReaction.setSongId(mySong.getId());
+        //mySongReaction.setReactionId(myReaction.getId());
         
-        myTweetReaction.setUser(user);
-        myTweetReaction.setTweet(myTweet);
-        myTweetReaction.setReaction(myReaction);
+        mySongReaction.setUser(user);
+        mySongReaction.setSong(mySong);
+        mySongReaction.setReaction(myReaction);
         
-        System.out.println("tweet reaction : "   );
-        System.out.println( myTweetReaction.getReactionId());
-                System.out.println( myTweetReaction.getTweetId());
+        System.out.println("Song reaction : "   );
+        System.out.println( mySongReaction.getReactionId());
+                System.out.println( mySongReaction.getSongId());
 
-                        System.out.println( myTweetReaction.getUserId());
+                        System.out.println( mySongReaction.getUserId());
 
 
-        tweetReactionRepository.save(myTweetReaction);
+        SongReactionRepository.save(mySongReaction);
 
-        return myTweetReaction;
+        return mySongReaction;
   }
 
     private User getValidUser(String userId) {
@@ -102,12 +102,12 @@ public class TweetReactionController {
         return userOpt.get();
     }
 
-    private Tweet getValidTweet(Long tweetId) {
-        Optional<Tweet> tweetOpt = tweetRepository.findById(tweetId);
-        if (!tweetOpt.isPresent()) {
-            throw new RuntimeException("Tweet not found");
+    private Song getValidSong(Long SongId) {
+        Optional<Song> SongOpt = SongRepository.findById(SongId);
+        if (!SongOpt.isPresent()) {
+            throw new RuntimeException("Song not found");
         }
-        return tweetOpt.get();
+        return SongOpt.get();
     }
 
     private Reaction getValidReaction(Long reactionId) {

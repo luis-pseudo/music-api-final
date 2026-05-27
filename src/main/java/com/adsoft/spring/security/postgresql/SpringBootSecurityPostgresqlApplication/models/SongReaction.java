@@ -1,16 +1,25 @@
 package com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table( name = "tweet_reactions",
+@Table( name = "song_reactions",
           uniqueConstraints = { 
-          @UniqueConstraint(columnNames = {"user_id", "tweet_id"}
+          @UniqueConstraint(columnNames = {"user_id", "song_id"}
           ),
       
         }
 )
 
-public class TweetReaction {
+public class SongReaction {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,15 +47,15 @@ public class TweetReaction {
     this.userId = userId;
    }
 
-    @Column(name = "tweet_id")
-    Long tweetId;
+    @Column(name = "song_id")
+    Long songId;
 
-  public Long getTweetId() {
-        return tweetId;
+  public Long getSongId() {
+        return songId;
     }
 
-    public void setTweetId(Long tweetId) {
-        this.tweetId = tweetId;
+    public void setSongId(Long songId) {
+        this.songId = songId;
     }
 
   public Long getId() {
@@ -73,17 +82,17 @@ public class TweetReaction {
     }
 
     @ManyToOne
-    @MapsId("tweetId")
-    @JoinColumn(name = "tweet_id")
-    Tweet tweet;
+    @MapsId("songId")
+    @JoinColumn(name = "song_id")
+    Song song;
 
-    public Tweet getTweet() {
-        return tweet;
+    public Song getSong() {
+        return song;
     }
 
-    public void setTweet(Tweet tweet) {
-        this.tweetId = tweet.getId();
-        this.tweet = tweet;
+    public void setSong(Song song) {
+        this.songId = song.getId();
+        this.song = song;
     }
 
     @ManyToOne

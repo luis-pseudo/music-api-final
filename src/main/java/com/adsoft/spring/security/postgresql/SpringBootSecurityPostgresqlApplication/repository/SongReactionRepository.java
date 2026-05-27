@@ -3,10 +3,10 @@ package com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplic
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.Tweet;
+import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.SongReaction;
 
 @Repository
-public interface TweetRepository extends JpaRepository<Tweet, Long> {
+public interface SongReactionRepository extends JpaRepository<SongReaction, Long> {
 
 }
 
