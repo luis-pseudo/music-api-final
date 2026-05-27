@@ -5,8 +5,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.EReaction;
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.ERole;
+import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.Reaction;
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.models.Role;
+import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.repository.ReactionRepository;
 import com.adsoft.spring.security.postgresql.SpringBootSecurityPostgresqlApplication.repository.RoleRepository;
 
 @SpringBootApplication
@@ -21,6 +24,15 @@ public class SpringBootSecurityPostgresqlApplication {
 		return args -> {
 			for (ERole roleName : ERole.values()) {
 				roleRepository.findByName(roleName).orElseGet(() -> roleRepository.save(new Role(roleName)));
+			}
+		};
+	}
+
+	@Bean
+	public CommandLineRunner initReactions(ReactionRepository reactionRepository) {
+		return args -> {
+			for (EReaction reactionName : EReaction.values()) {
+				reactionRepository.findByDescription(reactionName).orElseGet(() -> reactionRepository.save(new Reaction(reactionName)));
 			}
 		};
 	}
